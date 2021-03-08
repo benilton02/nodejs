@@ -12,4 +12,4 @@ function log(message){
     emitter.emit('log', message)
 }
 
-log('System response')
+module.exports = log
