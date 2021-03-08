@@ -19,5 +19,5 @@ function status(){
     }
     console.clear()
     console.table(status)
-    log("Running.")
+    log(`${JSON.stringify(status)}\n`)
 }
