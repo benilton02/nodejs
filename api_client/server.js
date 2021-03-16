@@ -1,4 +1,3 @@
-const { request } = require("express")
 const express = require("express")
 const data = require("./data.json")
 
@@ -32,7 +31,26 @@ app.post("/create", (request, response) => {
     //save requested data into database
 
     console.log({id, name})
-    response.json({id, name})
+    response.status(201).json({id, name})
+})
+
+app.put("/update/:id", (request, response) => {
+    const {id} = request.params
+    const client = data.find( cli => cli.id == id)
+
+    if(!client){
+        response.status(204).end()
+        console.log(`Request ID: ${id}`)
+    }
+    else{
+        const {name} = request.body
+
+        // update database
+        
+        client.name = name
+        response.status(201).json(client)
+        console.log(`Successfully Updated!`)
+    }
 })
 
 app.listen(port, () => {
