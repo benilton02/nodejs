@@ -53,6 +53,14 @@ app.put("/update/:id", (request, response) => {
     }
 })
 
+app.delete("/delete/:id", (request, response) => {
+    const {id} = request.params
+    const newData = data.filter( client => client.id != id )
+
+    console.log("Succesfully Deleted!")
+    response.status(200).json(newData)
+})
+
 app.listen(port, () => {
     console.log(`Server running at -> http://${host}:${port}`)
 })
