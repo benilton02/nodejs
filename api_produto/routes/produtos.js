@@ -28,4 +28,21 @@ router.get("/produto/:id_produto", (request, response, next) => {
   
 })
 
+router.delete("/produto/:id_produto", (request, response, next) => {
+    const produto = request.params.id_produto
+    response.status(200).json({
+        "produto":`${produto}`,
+        "status":"removido"
+    })
+})
+
+router.put("/produto/:id_produto", (request, response, next) => {
+    const {produto} = request.params.id_produto
+    response.status(201).json({
+        "produto":`${produto}`,
+        "status":"atualizado"
+    })
+})
+
+
 module.exports = router
