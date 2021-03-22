@@ -9,10 +9,15 @@ router.get("/produto", (request, response, next) => {
     response.status(200).send("Method GET")
 })
 
-router.post("/produto", (request, response, next) =>{
-    const {produto} = request.body
-    response.status(201).json({produto})
-    console.log({produto})
+router.post("/produto", (request, response, next) => {
+    const produto = {
+        name:request.body.nome,
+        price: request.body.preco 
+    }
+    response.status(201).json({
+        mensagem:"Insere um produto",
+        produtoCriado:produto
+    })
 })
 
 router.get("/produto/:id_produto", (request, response, next) => {
