@@ -6,17 +6,17 @@ router.get("/hello", (request, response, next) => {
 })
 
 router.get("/produto", (request, response, next) => {
-    response.status(200).send("Method GET")
+    response.status(200).end("Retorna os Produtos")
 })
 
 router.post("/produto", (request, response, next) => {
     const produto = {
-        name:request.body.nome,
-        price: request.body.preco 
+        name:request.body.name,
+        price: request.body.price
     }
-    response.status(201).json({
+    response.status(201).send({
         mensagem:"Insere um produto",
-        produtoCriado:produto
+        produtoCriado:produto 
     })
 })
 
@@ -24,11 +24,9 @@ router.get("/produto/:id_produto", (request, response, next) => {
     const id  = request.params.id_produto
     if (id == "pro"){
         response.status(200).send("Produto com desconto")
-        console.log("Produto com desconto")
     }
     else{
         response.status(200).send("Produto sem desconto")
-        console.log("Produto sem desconto")
     }
   
 })

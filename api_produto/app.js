@@ -1,51 +1,32 @@
-const morgan =  require("morgan")
 const express = require("express")
+const morgan = require("morgan")
 const rotaProdutos = require("./routes/produtos")
+const rotaPedidos = require("./routes/pedidos")
 const app = express()
 const dev = "dev"
-const defaultRoute = ""
-
-app.use(morgan(dev))
-
-app.use(express.urlencoded({extended: false}))
+const voidString = ""
 
 app.use(express.json())
 
+app.use(morgan(dev))
+
+app.use(voidString, rotaProdutos)
+
+app.use(voidString, rotaPedidos)
+
 app.use((request, response, next) => {
-    reponse.header('Acces-Control-Allow-Origin', '*')
-    reponse.header(
-        'Acces-Control-Allow-Origin', 
-        'X-Requested-With',
-        'Authorization',
-        'Content-Type',
-        'Accept',
-        'Origin'
-    )
-
-    if(request.method === 'OPTIONS'){
-        response.header('Acess-Control-Allow-Methods', 'GET', 'POST', 'DELETE', 'PUT')
-        return response.status(200).end("OK")
-    }
-    
-    next()
-})
-
-app.use(defaultRoute, rotaProdutos) 
-
-//Não encontra a rota no servidor
-app.use((request, response, next) => {
-    const erro = new Error("Not Exist")
-    erro.status = 404
-    next(erro)
+    const error = new Error("NOT FOUND")
+    error.status = 404
+    next(error)
 })
 
 app.use((error, request, response, next) =>{
     response.status(error.status || 500)
     return response.send({
-      erro:{
-          mensagem:error.message
-      }  
+        erro:{
+            msg:error.message
+        }
     })
 })
 
-module.exports = app
+module.exports = app;
