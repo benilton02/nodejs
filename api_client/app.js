@@ -1,6 +1,6 @@
 const express = require("express")
 const morgan = require("morgan")
-const clientRouter = require("./route/client")
+const clientRouter = require("./src/routes/client")
 const app = express()
 const client = "/client"
 
