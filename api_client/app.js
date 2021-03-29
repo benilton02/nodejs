@@ -1,6 +1,7 @@
 const express = require("express")
 const morgan = require("morgan")
 const clientRouter = require("./src/routes/client")
+const notFound = require("./src/routes/error")
 const app = express()
 const client = "/client"
 
@@ -10,19 +11,8 @@ app.use(express.json())
 
 app.use(client, clientRouter)
 
-app.use((request, response, next) => {
-    const error = new Error("NOT FOUND")
-    error.status = 404
-    next(error)
-})
+app.use(notFound.error)
 
-app.use((error, request, response, next) => {
-    response.status(error.status || 500)
-    return response.send({
-        erro:{
-            msg: error.message
-        }
-    })
-})
+app.use(notFound.errorResponse)
 
 module.exports = app
