@@ -1,6 +1,6 @@
 Para executar esta API automaticamente, siga os seguintes passos
-$ chmod 755 install.sh
-$ . install.sh
+$ chmod 755 env.sh
+$ . env.sh
 
 API CLIENT
 
