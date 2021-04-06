@@ -14,6 +14,6 @@ RUN npm install
 
 COPY --chown=node:node . .
 
-EXPOSE 3000
+EXPOSE ${container_port}
 
 CMD ["npm", "start"]
